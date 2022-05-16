@@ -30,29 +30,46 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 in1 = 24
 in2 = 23
 en = 25
+
+in3 = 17
+in4 = 27
+en2 = 22
 temp1 = 1
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(in1, GPIO.OUT)
 GPIO.setup(in2, GPIO.OUT)
+GPIO.setup(in3, GPIO.OUT)
+GPIO.setup(in4, GPIO.OUT)
 GPIO.setup(en, GPIO.OUT)
+GPIO.setup(en2, GPIO.OUT)
 GPIO.output(in1, GPIO.LOW)
 GPIO.output(in2, GPIO.LOW)
+GPIO.output(in3, GPIO.LOW)
+GPIO.output(in4, GPIO.LOW)
 pu = GPIO.PWM(en, 100)
+pu2 = GPIO.PWM(en2, 100)
 
 pu.start(25)
+pu2.start(25)
 #x = 's'
 
 if(temp1 == 1):
     pu.start(25)
-    GPIO.output(in1, GPIO.HIGH)
-    GPIO.output(in2, GPIO.LOW)
+    pu2.start(25)
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.HIGH)
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.HIGH)
     print("forward")
     #x = 'z'
 else:
     pu.start(25)
-    GPIO.output(in1, GPIO.LOW)
-    GPIO.output(in2, GPIO.HIGH)
+    pu2.start(25)
+    GPIO.output(in1, GPIO.HIGH)
+    GPIO.output(in2, GPIO.LOW)
+    GPIO.output(in3, GPIO.HIGH)
+    GPIO.output(in4, GPIO.LOW)
     print("backward")
     #x = 'z'
 
@@ -192,16 +209,19 @@ def run(
                         speed = 10
                         print(">>>>>>>>>>>>>>>> speed " + str(speed))
                         pu.ChangeDutyCycle(25)
+                        pu2.ChangeDutyCycle(25)
                        # x = 'l'
                     if kl == '2' :
                         speed = 20
                         print(">>>>>>>>>>>>>>>> speed " + str(speed))
                         pu.ChangeDutyCycle(50)
+                        pu2.ChangeDutyCycle(50)
                         #x = 'm'
                     if kl == '3':
                         speed = 30
                         print(">>>>>>>>>>>>>>>> speed " + str(speed))
                         pu.ChangeDutyCycle(75)
+                        pu2.ChangeDutyCycle(75)
                        # x = 'h'
                     
 
